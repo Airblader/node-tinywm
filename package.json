@@ -1,6 +1,6 @@
 {
   "name": "node-tinywm",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "TinyWM written in node.js",
   "main": "tinywm.js",
   "scripts": {
@@ -18,5 +18,8 @@
     "x11"
   ],
   "author": "Ingo Bürk",
-  "license": "Public Domain"
+  "license": "Public Domain",
+  "dependencies": {
+    "x11": "^1.0.3"
+  }
 }
