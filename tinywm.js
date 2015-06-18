@@ -19,8 +19,6 @@ x11.createClient( function( error, display ) {
     X.GrabButton( display.screen[0].root, true, x11.eventMask.ButtonPress | x11.eventMask.ButtonRelease | x11.eventMask.PointerMotion,
         GRAB_MODE_ASYNC, GRAB_MODE_ASYNC, NONE, NONE, 3, MOD_1_MASK );
 } ).on( 'event', function( event ) {
-    //console.log( event );
-
     if( event.name === 'KeyPress' && event.child !== 0 ) {
         X.RaiseWindow( event.child );
     } else if( event.name === 'ButtonPress' && event.child !== 0 ) {
