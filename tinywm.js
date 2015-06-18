@@ -1,14 +1,23 @@
-var x11 = require( 'x11' ),
-    start, attr;
+var x11 = require( 'x11' );
+
+/* Constants */
+var MOD_1_MASK = 1 << 3,
+    // TODO This won't be true for everyone
+    KEYSYM_F1 = 67,
+    GRAB_MODE_ASYNC = 1,
+    NONE = 0;
+
+/* Globals */
+var start, attr;
 
 x11.createClient( function( error, display ) {
     var X = global.X = display.client;
 
-    X.GrabKey( display.screen[0].root, true, 1 << 3 /* Mod1 */, 67 /* TODO F1 */, 1 /* Async */, 1 /* Async */ );
+    X.GrabKey( display.screen[0].root, true, MOD_1_MASK, KEYSYM_F1, GRAB_MODE_ASYNC, GRAB_MODE_ASYNC );
     X.GrabButton( display.screen[0].root, true, x11.eventMask.ButtonPress | x11.eventMask.ButtonRelease | x11.eventMask.PointerMotion,
-        1 /* Async */, 1 /* Async */, 0 /* None */, 0 /* None */, 1 /* Button */, 1 << 3 /* Mod1 */ );
+        GRAB_MODE_ASYNC, GRAB_MODE_ASYNC, NONE, NONE, 1, MOD_1_MASK );
     X.GrabButton( display.screen[0].root, true, x11.eventMask.ButtonPress | x11.eventMask.ButtonRelease | x11.eventMask.PointerMotion,
-        1 /* Async */, 1 /* Async */, 0 /* None */, 0 /* None */, 3 /* Button */, 1 << 3 /* Mod1 */ );
+        GRAB_MODE_ASYNC, GRAB_MODE_ASYNC, NONE, NONE, 3, MOD_1_MASK );
 } ).on( 'event', function( event ) {
     //console.log( event );
 
